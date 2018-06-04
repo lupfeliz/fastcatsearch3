@@ -13,7 +13,7 @@
 	<parent>
 		<groupId>co.fastcat</groupId>
 		<artifactId>fastcatsearch</artifactId>
-        <version>3.16.0</version>
+        <version>3.16.2</version>
 	</parent>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
