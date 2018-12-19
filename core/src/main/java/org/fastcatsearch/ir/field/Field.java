@@ -59,6 +59,12 @@ public abstract class Field implements Cloneable {
 				if(multiValueDelimiter == null){
 					multiValueDelimiter = DEFAULT_MULTI_VALUE_DELIMITER;
 				}
+				// 2018-12-12 로즈시스템즈 전제현
+				// 파이프를 구분자로 사용 시에는 [|] 형태로 정규식에 사용되어야 함
+				// 이에 대한 대비책 필요
+//				if (multiValueDelimiter.equals("|")) {
+//					multiValueDelimiter = "[" + multiValueDelimiter + "]";
+//				}
 //				StringTokenizer tokenizer = new StringTokenizer(rawString.trim(), multiValueDelimiter);
 //				while (tokenizer.hasMoreElements()) {
 //					addValue(tokenizer.nextToken().trim());
@@ -67,7 +73,9 @@ public abstract class Field implements Cloneable {
 				Matcher matcher = Pattern.compile(multiValueDelimiter).matcher(rawString);
 				while(matcher.find()) {
 //					System.out.println(index + " : "+ matcher.start());
-					if(index != matcher.start()){
+					int chkStart = matcher.start();
+//					if(index != matcher.start()){
+					if(index != chkStart){
 						addValue(rawString.substring(index, matcher.start()));
 					}
 					index = matcher.end();
