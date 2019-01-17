@@ -17,9 +17,17 @@ public interface UserAccountMapper extends ManagedMapper {
 	
 	public int getMaxId() throws Exception;
 	
-	public void putEntry (UserAccountVO vo) throws Exception;
+	public void putEntry(UserAccountVO vo) throws Exception;
 	
-	public void updateEntry (UserAccountVO vo) throws Exception;
+	public void updateEntry(UserAccountVO vo) throws Exception;
 	
-	public void deleteEntry (@Param("id") int id) throws Exception;
+	public void deleteEntry(@Param("id") int id) throws Exception;
+
+	public void updateLoginFailCheck(@Param("userId") String userId) throws Exception;
+
+	public void resetLoginFailCheck(@Param("userId") String userId) throws Exception;
+
+	public void updateSuccessLoginDate(@Param("userId") String userId) throws Exception;
+
+	public void updateFailLoginDate(@Param("userId") String userId) throws Exception;
 }

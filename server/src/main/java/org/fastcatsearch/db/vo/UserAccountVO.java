@@ -1,6 +1,7 @@
 package org.fastcatsearch.db.vo;
 
 import org.fastcatsearch.util.MessageDigestUtils;
+import java.util.Date;
 
 public class UserAccountVO {
 	public static final String ADMIN_USER_NAME = "Administrator";
@@ -14,6 +15,9 @@ public class UserAccountVO {
 	public String sms;
 	public String telegram;
 	public int groupId;
+	public int loginFailCount;
+	public Date loginSuccessDatetime;
+	public Date loginFailDatetime;
 	
 	public UserAccountVO(){ }
 	
@@ -24,6 +28,7 @@ public class UserAccountVO {
 		this.sms = sms;
 		this.telegram = "";
 		this.groupId = groupId;
+		this.loginFailCount = 0;
 		
 		setEncryptedPassword(password);
 	}
@@ -35,6 +40,7 @@ public class UserAccountVO {
 		this.sms = sms;
 		this.telegram = telegram;
 		this.groupId = groupId;
+		this.loginFailCount = 0;
 
 		setEncryptedPassword(password);
 	}

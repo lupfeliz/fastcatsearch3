@@ -7,15 +7,18 @@
 
 	<update id="createTable">
 		create table UserAccount (
-		id int GENERATED ALWAYS AS IDENTITY,
-		name varchar(30),
-		userId varchar(30),
-		password varchar(200),
-		email varchar(60),
-		sms varchar(60),
-		telegram varchar(60),
-		groupId int,
-		primary key (id)
+			id int GENERATED ALWAYS AS IDENTITY,
+			name varchar(30),
+			userId varchar(30),
+			password varchar(200),
+			email varchar(60),
+			sms varchar(60),
+			telegram varchar(60),
+			groupId int,
+			loginFailCount int,
+			loginSuccessDatetime timestamp,
+			loginFailDatetime timestamp,
+			primary key (id)
 		)
 	</update>
 	
@@ -25,7 +28,7 @@
 	
 	
 	<select id="validateTable" parameterType="map" resultType="map">
-		select id, name, userId, password, sms, groupId, telegram
+		select id, name, userId, password, email, sms, telegram, groupId, loginFailCount
 		from UserAccount 
 		fetch first 1 rows only
 	</select>
@@ -80,6 +83,30 @@
 	
 	<update id="deleteEntry" parameterType="int">
 		delete from UserAccount where id = #{id}
+	</update>
+
+	<update id="updateLoginFailCheck" parameterType="int">
+		update UserAccount
+		set loginFailCount=loginFailCount+1
+		where userId=#{userId}
+	</update>
+
+	<update id="resetLoginFailCheck" parameterType="int">
+		update UserAccount
+		set loginFailCount=0
+		where userId=#{userId}
+	</update>
+
+	<update id="updateSuccessLoginDate" parameterType="int">
+		update UserAccount
+		set loginSuccessDatetime=CURRENT_TIMESTAMP
+		where userId=#{userId}
+	</update>
+
+	<update id="updateFailLoginDate" parameterType="int">
+		update UserAccount
+		set loginFailDatetime=CURRENT_TIMESTAMP
+		where userId=#{userId}
 	</update>
 
 </mapper>
