@@ -37,7 +37,7 @@ public class DBService extends AbstractDBService {
 
 	protected static DBService instance;
 
-	private static Class<?>[] mapperList = new Class<?>[] { 
+	private static Class<?>[] mapperList = new Class<?>[] {
 		ExceptionHistoryMapper.class
 		, NotificationHistoryMapper.class
 		, TaskHistoryMapper.class
@@ -94,7 +94,7 @@ public class DBService extends AbstractDBService {
 			}
 		} else if (managedMapper instanceof UserAccountMapper) {
 			UserAccountMapper mapper = (UserAccountMapper) managedMapper;
-			mapper.putEntry(new UserAccountVO(UserAccountVO.ADMIN_USER_NAME, UserAccountVO.ADMIN_USER_ID, "1111", "", "", 1));
+			mapper.putEntry(new UserAccountVO(UserAccountVO.ADMIN_USER_NAME, UserAccountVO.ADMIN_USER_ID, settings.getString("administrator-init-password", "fastcat714%"), "", "", 1));
 		}
 	}
 
